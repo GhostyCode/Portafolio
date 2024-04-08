@@ -1,10 +1,62 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
+import Badge from "../components/Badge.astro";
+import ghosty from "../assets/images/Photo_ghostycode.jpg";
+import LinkedInIcon from "../assets/icons/LinkedIn.astro";
+import GitHubIcon from "../assets/icons/GitHub.astro";
+import MailIcon from "../assets/icons/Mail.astro";
+import SocialPill from "../components/SocialPill.astro";
 ---
 
-<Layout title="Welcome to Astro.">
-	<main>
-		<h1>Portafolio</h1>
-	</main>
+<Layout 
+title="Portafolio Santander - Desarrollador y Programador Backend con 1 año de experiencia"
+description="Contrata a Santander Iglesias, Desarrollador Backend con 1 año de experiencia y estudiante de Ingenieria de Sistemas. Especializado en ...."
+>
+  <main>
+    <section class="w-full mx-auto lg:w-[740px] py-44">
+      <img
+        class="rounded-full size-12 mb-4"
+        src={ghosty.src}
+        alt="ghostycode foto"
+      />
+
+      <h1 class="text-white text-5xl font-bold flex flex-row gap-x-4 pb-10">
+        Hola, soy Santander Iglesias 👋
+        <a
+          href="https://www.linkedin.com/in/santander-iglesias/"
+          target="_blank"
+          rel="noopener"
+          class="flex justify-center items-center"
+        >
+          <Badge> Disponible para trabajar </Badge>
+        </a>
+      </h1>
+      <h2 class="text-2xl opacity-80 text-wrap">
+        <span>1 año de experiencia.</span>
+        <span class="text-yellow-100/90">
+          Desarrollador Backend y estudiante de Ingenieria de Sistemas.</span
+        >
+        <span class="text-red-200/90"> De Colombia ....</span>
+        <span class="opacity-75"> Especializado en ....</span>
+      </h2>
+
+      <nav class="flex gap-x-4 mt-8">
+        <SocialPill href="https://www.linkedin.com/in/santander-iglesias/">
+          <LinkedInIcon class="w-6 h-6" />
+          LinkedIn
+        </SocialPill>
+
+        <SocialPill href="https://www.github.com/GhostyCode/">
+          <GitHubIcon class="w-6 h-6" />
+          GitHub
+        </SocialPill>
+
+        <SocialPill href="https://www.github.com/GhostyCode/">
+          <MailIcon class="w-6 h-6" />
+          santander12342011@gmail.com
+        </SocialPill>
+      </nav>
+    </section>
+  </main>
 </Layout>
