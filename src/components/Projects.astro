@@ -1,0 +1,72 @@
+---
+import Django from "../assets/icons/Django.astro";
+import Python from "../assets/icons/Python.astro";
+import Wordpress from "../assets/icons/Wordpress.astro";
+import Php from "../assets/icons/PHP.astro";
+import Cafecito from "../assets/images/CafecitoParaOrar.png";
+
+const TAGS = {
+  DJANGO: {
+    name: "Django",
+    class: "bg-white text-black",
+    icon: Django,
+  },
+
+  PYTHON: {
+    name: "Python",
+    class: "bg-white text-black",
+    icon: Python,
+  },
+
+  WORDPRESS: {
+    name: "Wordpress",
+    class: "bg-white text-black",
+    icon: Wordpress,
+  },
+  
+  PHP: {
+    name: "Php",
+    class: "bg-white text-black",
+    icon: Php,
+  },
+};
+
+const PROJECTS = [
+  {
+    title: "Cafecito Para Orar - Ecommerce", 
+    description: "Plataforma ecommerce para la venta de productos físicos como libros. Creado desde cero con Wordpress, CSS, y PHP.",
+    link: "https://cafecitoparaorar.com",
+    github: "#",
+    image: Cafecito,
+    tags: [TAGS.WORDPRESS, TAGS.PHP],
+  },
+];
+---
+
+{
+  PROJECTS.map(({ image, title, description, tags }) => (
+    <article>
+      <h3 class="text-2xl font-semibold text-yellow-200 mb-2">{title}</h3>
+      <p class="text-lg mb-4 text-pretty">{description}</p>
+      <ul class="flex gap-x-2 flex-row">
+        {tags.map((tag) => (
+          <li>
+            <span
+              class={`flex gap-x-2 rounded-full text-xs ${tag.class} py-1 px-2`}
+            >
+              <tag.icon class="size-5" />
+              {tag.name}
+            </span>
+          </li>
+        ))}
+      </ul>
+      <img
+        class="rounded shadow-2xl shadow-white/10"
+        src={image.src}
+        alt={`Imagen del proyecto ${image}`}
+      />
+
+      
+    </article>
+  ))
+}
