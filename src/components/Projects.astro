@@ -4,6 +4,7 @@ import Python from "../assets/icons/Python.astro";
 import Wordpress from "../assets/icons/Wordpress.astro";
 import Php from "../assets/icons/PHP.astro";
 import Cafecito from "../assets/images/CafecitoParaOrar.png";
+import Dashboard from "../assets/images/Dashboard.png";
 
 const TAGS = {
   DJANGO: {
@@ -29,6 +30,8 @@ const TAGS = {
     class: "bg-white text-black",
     icon: Php,
   },
+
+
 };
 
 const PROJECTS = [
@@ -40,7 +43,16 @@ const PROJECTS = [
     image: Cafecito,
     tags: [TAGS.WORDPRESS, TAGS.PHP],
   },
+  {
+    title: "Dashboard de Análisis de Atenciones en IPS", 
+    description: "Dashboard desarrollado en Metabase para el análisis de los datos de atenciones realizadas en una IPS, evaluando diversos indicadores como la cantidad de citas asignadas, citas perdidas, desempeño médico, entre otros factores.",
+    link: "https://cafecitoparaorar.com",
+    github: "#",
+    image: Dashboard,
+    tags: [TAGS.PYTHON],
+  },
 ];
+
 ---
 
 {
