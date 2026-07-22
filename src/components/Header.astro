@@ -1,4 +1,6 @@
 ---
+import ThemeToggle from "./ThemeToggle.astro";
+
 const navItems = [
   {
     title: "Experiencia",
@@ -36,7 +38,7 @@ const navItems = [
   class="fixed top-0 z-10 flex items-center justify-center w-full mx-auto mt-2"
 >
   <nav
-    class="flex px-3 text-sm font-medium rounded-full text-gray-600 dark:text-gray-200 justify-center items-center"
+    class="flex px-3 text-sm font-medium rounded-full text-gray-600 dark:text-gray-200 justify-center items-center gap-x-1"
   >
     {
       navItems.map((link) => (
@@ -49,13 +51,15 @@ const navItems = [
         </a>
       ))
     }
+    <ThemeToggle />
   </nav>
 </header>
 
 <script>
-  document.addEventListener("astro:page-load", () => {
+  function initScrollSpy() {
     const sections = document.querySelectorAll("section");
     const navItems = document.querySelectorAll("header nav a");
+    if (!sections.length) return;
 
     const callback = (entries: any[]) => {
       entries.forEach((entry) => {
@@ -91,19 +95,37 @@ const navItems = [
         });
       }
     };
-  });
+  }
+
+  initScrollSpy();
+  document.addEventListener("astro:page-load", initScrollSpy);
 </script>
 
 <style>
   nav {
+    /* Variables de tema para el fondo del nav al hacer scroll.
+       Se definen fuera del @keyframes para no usar variantes `dark:`
+       dentro de la animación (produce CSS inválido al minificar). */
+    --nav-bg: rgba(255, 255, 255, 0.55);
+    --nav-ring: rgba(0, 0, 0, 0.06);
     animation: nav-shadown 1s linear both;
     animation-timeline: scroll();
     animation-range: 0 100px;
   }
 
+  :global(html.dark) nav {
+    --nav-bg: rgba(31, 41, 55, 0.9);
+    --nav-ring: rgba(255, 255, 255, 0.1);
+  }
+
   @keyframes nav-shadown {
     to {
-      @apply shadow-lg ring-1 backdrop-blur dark:bg-gray-800/90 bg-white/50 ring-white/10;
+      background-color: var(--nav-bg);
+      backdrop-filter: blur(8px);
+      box-shadow:
+        0 0 0 1px var(--nav-ring),
+        0 10px 15px -3px rgba(0, 0, 0, 0.1),
+        0 4px 6px -4px rgba(0, 0, 0, 0.1);
     }
   }
 </style>

@@ -1,24 +1,10 @@
 ---
-import ExperienceItem from "./ExperienceItem.astro"
-const EXPERIENCIE = [
-  {
-    date: "Actualmente...",
-    title: "Ingeniero de Sistemas",
-    description:
-      "Actualmente me desempeño como Ingeniero de Sistemas, cumpliendo funciones de administración de bases de datos, análisis de datos, desarrollo de software y parametrización de sistemas en el área de la salud.",
-    // link: "#",
-  },
-  {
-    date: "Septiembre 2022",
-    title: "Analista de Sistemas de información",
-    description:
-      "Durante mi trabajo en este puesto, asumí el rol de analista desarrollador, colaborando en el desarrollo de una aplicación web destinada a realizar visitas domiciliarias. Durante este proceso, contribuí implementando mejoras utilizando PHP y MySQL.",
-  },
-]
+import ExperienceItem from "./ExperienceItem.astro";
+import { EXPERIENCE } from "../data/portfolio";
 ---
 <ol class="relative borders-s border-gray-200 ml-3">
   {
-    EXPERIENCIE.map((experiencie) => (
+    EXPERIENCE.map((experiencie) => (
       <li class="mb-10 ms-4">
         <ExperienceItem {...experiencie} />
       </li>

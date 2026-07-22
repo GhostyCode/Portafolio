@@ -2,6 +2,7 @@
 import "@fontsource-variable/onest";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import TerminalWidget from "../components/TerminalWidget.astro";
 
 interface Props {
   title: string;
@@ -20,15 +21,46 @@ const { description, title } = Astro.props;
     <link rel="icon" type="image" href="/GhostyCode.png" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+
+    {/* Helpers de tema + aplicación temprana para evitar el flash de tema incorrecto */}
+    <script is:inline>
+      window.__getTheme = () =>
+        document.documentElement.classList.contains("dark") ? "dark" : "light";
+
+      window.__setTheme = (theme) => {
+        document.documentElement.classList.toggle("dark", theme === "dark");
+        try {
+          localStorage.setItem("theme", theme);
+        } catch (e) {}
+        window.dispatchEvent(
+          new CustomEvent("themechange", { detail: { theme } })
+        );
+      };
+
+      (() => {
+        let theme;
+        try {
+          const stored = localStorage.getItem("theme");
+          if (stored === "light" || stored === "dark") theme = stored;
+        } catch (e) {}
+        if (!theme) {
+          theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+        }
+        document.documentElement.classList.toggle("dark", theme === "dark");
+      })();
+    </script>
   </head>
-  <body>
+  <body class="text-neutral-800 dark:text-gray-200 transition-colors duration-300">
     <div
-      class="absolute top-0 z-[-2] h-screen w-screen bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"
+      class="fixed inset-0 z-[-2] transition-colors duration-300 bg-neutral-50 dark:bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.12),rgba(255,255,255,0))] dark:bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"
     >
     </div>
     <Header />
     <slot />
     <Footer />
+    <TerminalWidget />
   </body>
 </html>
 <style is:global>
@@ -42,10 +74,15 @@ const { description, title } = Astro.props;
   }
 
   body {
-    background: #050505;
+    background: #fafafa;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    transition: background-color 0.3s ease;
+  }
+
+  html.dark body {
+    background: #0a0a0a;
   }
 
   @media (prefers-reduced-motion: reduce) {

@@ -1,0 +1,39 @@
+---
+import SunIcon from "../assets/icons/SunIcon.astro";
+import MoonIcon from "../assets/icons/MoonIcon.astro";
+---
+
+<button
+  id="theme-toggle"
+  type="button"
+  aria-label="Cambiar tema claro u oscuro"
+  title="Cambiar tema"
+  class="relative flex items-center justify-center size-9 rounded-full
+  text-gray-600 dark:text-gray-200
+  transition hover:text-neutral-900 dark:hover:text-white
+  hover:bg-black/5 dark:hover:bg-white/10
+  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7877c6]/60"
+>
+  <!-- Se muestra en modo claro (invita a pasar a oscuro) -->
+  <MoonIcon class="size-5 block dark:hidden" />
+  <!-- Se muestra en modo oscuro (invita a pasar a claro) -->
+  <SunIcon class="size-5 hidden dark:block" />
+</button>
+
+<script>
+  function initThemeToggle() {
+    const button = document.getElementById("theme-toggle");
+    if (!button || button.dataset.bound === "true") return;
+    button.dataset.bound = "true";
+
+    button.addEventListener("click", () => {
+      const next = window.__getTheme() === "dark" ? "light" : "dark";
+      window.__setTheme(next);
+    });
+  }
+
+  // Los <script> de Astro son módulos diferidos: el DOM ya está listo aquí.
+  // No dependemos de `astro:page-load` (solo existe con ViewTransitions).
+  initThemeToggle();
+  document.addEventListener("astro:page-load", initThemeToggle);
+</script>

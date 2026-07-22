@@ -1,6 +1,5 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
 import Badge from "../components/Badge.astro";
 import ghosty from "../assets/images/Photo_ghostycode.jpg";
 import LinkedInIcon from "../assets/icons/LinkedIn.astro";
@@ -12,6 +11,7 @@ import SectionContainer from "../components/SectionContainer.astro";
 import Briefcase from "../assets/icons/BriefCase.astro";
 import CodeIcon from "../assets/icons/Code.astro";
 import Projects from "../components/Projects.astro";
+import { PROFILE } from "../data/portfolio";
 ---
 
 <Layout
@@ -21,10 +21,9 @@ import Projects from "../components/Projects.astro";
   <main class="px-2">
     <SectionContainer id="sobre-mi" class="py-16 md:py-36">
       <img
-        class="rounded-full size-12 mb-4"
+        class="rounded-full size-16 mb-4 ring-1 ring-black/10 dark:ring-white/15 shadow-lg shadow-black/10 dark:shadow-black/40"
         src={ghosty.src}
         alt="ghostycode foto"
-        
       />
       <!-- <Badge> Disponible para trabajar </Badge> -->
 
@@ -46,12 +45,12 @@ import Projects from "../components/Projects.astro";
         </div> -->
 
         <h1
-          class="text-white text-3xl md:text-4xl lg:text-5xl font-bold flex
+          class="text-neutral-900 dark:text-white text-3xl md:text-4xl lg:text-5xl font-bold flex
       flex-row gap-x-4 pb-6 lg:pb-10"
         >
           Hola, soy Santander Iglesias 👋
           <a
-            href="https://www.linkedin.com/in/santander-iglesias/"
+            href={PROFILE.linkedin}
             target="_blank"
             rel="noopener"
             class="flex justify-center items-center"
@@ -61,43 +60,50 @@ import Projects from "../components/Projects.astro";
         </h1>
         <h2 class="text-lg lg:text-2xl text-wrap max-w-[700px]">
           <span>+1 año de experiencia.</span>
-          <span class="text-yellow-100/90">
-            Analista de Datos y Desarrollador de Sistemas de Información e Ingenierio de Sistemas,</span
+          <span class="text-yellow-700 dark:text-yellow-100/90">
+            Analista de Datos y Desarrollador de Sistemas de Información e
+            Ingenierio de Sistemas,</span
           >
-          <span class="text-red-200/95"> de Colombia. </span>
-          <span class="opacity-75"> Especializado en el desarrollo de aplicaciones webs personalizadas.</span>
+          <span class="text-red-500 dark:text-red-200/95"> de Colombia. </span>
+          <span class="opacity-75">
+            Especializado en el desarrollo de aplicaciones webs personalizadas.</span
+          >
         </h2>
 
         <nav class="flex gap-4 mt-8 flex-wrap">
-          <SocialPill href="https://www.linkedin.com/in/santander-iglesias/">
+          <SocialPill href={PROFILE.linkedin}>
             <LinkedInIcon class="size-4 md:size-6" />
             LinkedIn
           </SocialPill>
 
-          <SocialPill href="https://www.github.com/GhostyCode/">
+          <SocialPill href={PROFILE.github}>
             <GitHubIcon class="size-4 md:size-6" />
             GitHub
           </SocialPill>
 
-          <SocialPill href="mailto:santander12342011@gmail.com">
+          <SocialPill href={`mailto:${PROFILE.email}`}>
             <MailIcon class="size-4 md:size-6" />
-            santander12342011@gmail.com
+            {PROFILE.email}
           </SocialPill>
         </nav>
       </div>
     </SectionContainer>
 
     <SectionContainer id="experiencia">
-      <h2 class="text-3xl font-semibold mb-6 flex gap-x-3 items-center">
-        <Briefcase class="size-8" />
+      <h2
+        class="text-3xl font-semibold mb-8 flex gap-x-3 items-center text-neutral-900 dark:text-white"
+      >
+        <Briefcase class="size-7 opacity-80" />
         Experiencia laboral
       </h2>
       <Experience />
     </SectionContainer>
 
-    <SectionContainer id="proyectos">
-      <h2 class="text-3xl font-semibold mb-6 flex gap-x-3 items-center">
-        <CodeIcon class="size-8" />
+    <SectionContainer id="proyectos" class="mt-16 md:mt-24">
+      <h2
+        class="text-3xl font-semibold mb-8 flex gap-x-3 items-center text-neutral-900 dark:text-white"
+      >
+        <CodeIcon class="size-7 opacity-80" />
         Proyectos
       </h2>
       <Projects />
